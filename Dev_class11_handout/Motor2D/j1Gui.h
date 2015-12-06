@@ -5,7 +5,20 @@
 
 #define CURSOR_WIDTH 2
 
-// TODO 1: Create your structure of classes
+enum mouseEvents
+{
+	mouseEnter,
+	mouseLeave,
+	mouseIdle
+};
+
+enum uiTypes
+{
+	labelT,
+	imageT
+};
+
+
 class UI_element
 {
 public:
@@ -14,6 +27,9 @@ public:
 public:
 	//Rectangle of screen position
 	SDL_Rect pos_rect;
+	j1Module* listener;
+protected:
+	uiTypes type;
 
 };
 
@@ -64,8 +80,9 @@ public:
 	// Gui creation functions
 	UI_image* createImage(SDL_Rect rect, SDL_Rect rect2);
 	UI_label* createLabel(char*, int , int );
-
-	//TODO destruir-ho tot una mica
+	
+	void recieveEvents(mouseEvents, uiTypes);
+	
 	const SDL_Texture* GetAtlas() const;
 
 private:

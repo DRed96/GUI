@@ -3,6 +3,10 @@
 // Interface for all engine modules
 // ----------------------------------------------------
 
+//Risky
+enum mouseEvents;
+enum uiTypes;
+
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
 
@@ -72,6 +76,11 @@ public:
 		return true;
 	}
 
+	//Recieve events
+	virtual void recieveEvents(mouseEvents, uiTypes)
+	{
+		return;
+	}
 public:
 
 	p2SString	name;

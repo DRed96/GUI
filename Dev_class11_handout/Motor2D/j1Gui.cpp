@@ -57,7 +57,12 @@ bool j1Gui::PostUpdate()
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-
+	p2List_item<UI_element*>* tmp = uis.start;
+	while (tmp)
+	{
+		RELEASE(tmp->data);
+		tmp = tmp->next;
+	}
 	return true;
 }
 
