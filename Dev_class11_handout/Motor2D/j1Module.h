@@ -5,7 +5,7 @@
 
 //Risky
 enum mouseEvents;
-enum uiTypes;
+class UI_element;
 
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
@@ -77,7 +77,7 @@ public:
 	}
 
 	//Recieve events
-	virtual void recieveEvents(mouseEvents, uiTypes)
+	virtual void recieveEvents(mouseEvents,UI_element*)
 	{
 		return;
 	}
