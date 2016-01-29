@@ -43,10 +43,13 @@ bool j1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-
+	uint sx, sy;
+	App->win->GetWindowSize(sx, sy);
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
-
-
+	//TOCHANGE
+	UI_image * test = App->gui->createImage(SDL_Rect{ (sx - 328) / 2, 50, 0, 0 }, SDL_Rect{ 0, 113, 229, 69 });
+	test->hover_rect = { 411, 169, 229, 69 };
+	App->gui->createLabel("Hello world ^-^", sx / 2,600);
 	return true;
 }
 
@@ -154,4 +157,12 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+//Gui events
+void j1Scene::recieveEvents(mouseEvents _m, UI_element* ui)
+{
+	//TOCHANGE
+	ui->eventReaction(_m);
+	
 }

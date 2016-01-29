@@ -33,7 +33,8 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
-
+	// GuiEvents
+	void recieveEvents(mouseEvents, UI_element*);
 private:
 	SDL_Texture* debug_tex;
 	GuiImage* banner;
