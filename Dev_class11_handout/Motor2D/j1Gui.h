@@ -6,7 +6,8 @@
 #define CURSOR_WIDTH 2
 
 // TODO 1: Create your structure of classes
-
+class GuiElement;
+class GuiImage;
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -34,10 +35,15 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
+	GuiElement* createImage(const int x, const int y,  SDL_Rect& section, SDL_Texture* = NULL);
+
+	//Draw method
+	//Const, how?
+	//Think
 
 	const SDL_Texture* GetAtlas() const;
-
 private:
+	p2List<GuiElement*> guis;
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;

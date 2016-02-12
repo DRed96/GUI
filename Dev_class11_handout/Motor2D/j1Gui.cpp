@@ -6,6 +6,7 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "GuiElements.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -51,7 +52,7 @@ bool j1Gui::PostUpdate()
 bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
-
+	guis.clear();
 	return true;
 }
 
@@ -63,3 +64,17 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
+GuiElement* j1Gui::createImage(const int x, const int y, SDL_Rect& _section, SDL_Texture* _tex)
+{
+	if (_tex == NULL)
+	{
+		_tex = atlas;
+	}
+
+	GuiElement* ret = new GuiImage(_section, _tex);
+	ret->SetPos(x, y);
+
+	guis.add(ret);
+
+	return ret;
+}
