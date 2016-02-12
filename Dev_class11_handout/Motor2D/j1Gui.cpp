@@ -45,6 +45,12 @@ bool j1Gui::PreUpdate()
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	p2List_item<GuiElement*>*it = guis.start;
+	while (it)
+	{
+		it->data->Draw();
+		it = it->next;
+	}
 	return true;
 }
 
@@ -64,7 +70,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
-GuiElement* j1Gui::createImage(const int x, const int y, SDL_Rect& _section, SDL_Texture* _tex)
+void j1Gui::createImage(SDL_Rect& _section, SDL_Texture* _tex, const int x, const int y)
 {
 	if (_tex == NULL)
 	{
@@ -72,9 +78,19 @@ GuiElement* j1Gui::createImage(const int x, const int y, SDL_Rect& _section, SDL
 	}
 
 	GuiElement* ret = new GuiImage(_section, _tex);
-	ret->SetPos(x, y);
+	ret->SetPosition(x, y);
 
 	guis.add(ret);
 
-	return ret;
+}
+
+void j1Gui::createLabel(char * _string, const int x, const int y)
+{
+	if (_string != NULL)
+	{
+		GuiElement* ret = new GuiLabel(_string);
+		ret->SetPosition(x, y);
+
+		guis.add(ret);
+	}
 }

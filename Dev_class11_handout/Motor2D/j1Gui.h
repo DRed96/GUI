@@ -35,11 +35,10 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	GuiElement* createImage(const int x, const int y,  SDL_Rect& section, SDL_Texture* = NULL);
-
-	//Draw method
+	void createImage(SDL_Rect& section, SDL_Texture* = NULL, const int x = 0, const int y = 0);
+	void createLabel(char * _string, const int x= 0, const int y = 0);
+	
 	//Const, how?
-	//Think
 
 	const SDL_Texture* GetAtlas() const;
 private:

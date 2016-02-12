@@ -1,5 +1,5 @@
-#ifndef GUI_ELEMENTS
-#define GUI_ELEMENTS
+#ifndef GUI_ELEMENTS_H
+#define GUI_ELEMENTS_H
 
 #include "SDL/include/SDL.h"
 
@@ -10,11 +10,13 @@ public:
 	~GuiElement(){}
 
 	virtual void Draw(){}
-	void SetPos(int x, int y);
-	//GetRect
+	void SetPosition(int x, int y);
+	void SetRect(int x, int y, int w, int h);
+	
+	SDL_Rect GetRect() const;
 
-//private:
-//protected:
+private:
+protected:
 	SDL_Rect posRect;
 };
 
@@ -25,8 +27,20 @@ public:
 	~GuiImage(){};
 
 	void Draw();
-//private:
+private:
 	SDL_Texture* texture;
 	SDL_Rect section;
 };
-#endif // !GUI_ELEMENTS
+
+class GuiLabel : public GuiElement
+{
+public:
+	GuiLabel(char * text);
+	~GuiLabel(){};
+
+	void Draw();
+private:
+	SDL_Texture* texture;
+	char* string;
+};
+#endif // !GUI_ELEMENTS_H
