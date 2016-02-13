@@ -32,6 +32,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	/*
 	if(App->map->Load("iso_walk.tmx") == true)
 	{
 		int w, h;
@@ -42,7 +43,8 @@ bool j1Scene::Start()
 		RELEASE_ARRAY(data);
 	}
 
-	debug_tex = App->tex->Load("maps/path2.png");
+	debug_tex = App->tex->Load("maps/path2.png
+	*/
 
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	App->gui->createLabel("This is a test", 400, 10);
@@ -54,7 +56,7 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-
+	/*
 	// debug pathfing ------------------
 	static iPoint origin;
 	static bool origin_selected = false;
@@ -77,7 +79,7 @@ bool j1Scene::PreUpdate()
 			origin_selected = true;
 		}
 	}
-
+	*/
 	return true;
 }
 

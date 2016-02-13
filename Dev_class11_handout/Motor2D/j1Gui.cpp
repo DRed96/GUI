@@ -42,6 +42,12 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
+bool j1Gui::Update(float dt)
+{
+	checkMouseHover();
+	return true;
+}
+
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
@@ -93,4 +99,35 @@ void j1Gui::createLabel(char * _string, const int x, const int y)
 
 		guis.add(ret);
 	}
+}
+
+bool j1Gui::checkMouseHover()
+{
+	p2List_item<GuiElement*>*it = guis.start;
+
+	bool inside = false;
+
+	while (it != NULL)
+	{
+		int m_x, m_y;
+		App->input->GetMousePosition(m_x, m_y);
+
+		SDL_Rect rect = it->data->GetPosRect();
+
+		//Check collsion
+		if (m_x > rect.x && m_x < (rect.x + rect.w))
+		{
+			if (m_y > rect.y && m_y < (rect.y + rect.h))
+			{
+				inside = true;
+				it->data->onAction(mouse_enter);
+			}
+		}
+		if (!inside && it->data->current_state == (gui_hover || gui_action))
+		{
+			it->data->onAction(mouse_leave);
+		}
+		it = it->next;
+	}
+	return false;
 }

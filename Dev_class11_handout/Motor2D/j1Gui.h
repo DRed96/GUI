@@ -7,7 +7,7 @@
 
 // TODO 1: Create your structure of classes
 class GuiElement;
-class GuiImage;
+
 // ---------------------------------------------------
 class j1Gui : public j1Module
 {
@@ -27,6 +27,9 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	// Called each loop iteration
+	bool Update(float dt);
+
 	// Called after all Updates
 	bool PostUpdate();
 
@@ -37,15 +40,19 @@ public:
 	// Gui creation functions
 	void createImage(SDL_Rect& section, SDL_Texture* = NULL, const int x = 0, const int y = 0);
 	void createLabel(char * _string, const int x= 0, const int y = 0);
-	
 	//Const, how?
+
+	//Checks mouse hover
+	bool checkMouseHover();
 
 	const SDL_Texture* GetAtlas() const;
 private:
-	p2List<GuiElement*> guis;
-
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
+
+	p2List<GuiElement*> guis;
+
+	
 };
 
 #endif // __j1GUI_H__
