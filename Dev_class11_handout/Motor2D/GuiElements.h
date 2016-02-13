@@ -68,12 +68,12 @@ private:
 	//char* string;
 };
 
-class GuiButtons : public GuiElement
+class GuiButton : public GuiElement
 {
 public:
 
-	GuiButtons(SDL_Texture&, SDL_Rect &, SDL_Rect * = NULL, SDL_Rect * = NULL);
-	~GuiButtons(){}
+	GuiButton(SDL_Texture&, SDL_Rect &, SDL_Rect &, SDL_Rect &);
+	~GuiButton(){}
 
 	void Draw();
 

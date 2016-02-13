@@ -38,8 +38,9 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	void createImage(SDL_Rect& section, SDL_Texture* = NULL, const int x = 0, const int y = 0);
-	void createLabel(char * _string, const int x= 0, const int y = 0);
+	void createImage(SDL_Rect& section, SDL_Texture* = NULL,  int x = 0,  int y = 0);
+	void createLabel(char * _string,  int x= 0,  int y = 0);
+	void createButton(SDL_Rect &, SDL_Rect &, SDL_Rect &, SDL_Texture* = NULL,  int x = 0,  int y = 0);
 	//Const, how?
 
 	//Checks mouse hover

@@ -49,7 +49,7 @@ bool j1Scene::Start()
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	App->gui->createLabel("This is a test", 400, 10);
 	App->gui->createImage(SDL_Rect{ 485, 829, 328, 103 }, NULL, 350, 50);
-
+	App->gui->createButton(SDL_Rect{ 0, 113, 229, 69 }, SDL_Rect{ 642, 169, 229, 69 }, SDL_Rect{ 411, 169, 229, 69 }, NULL, 350, 70);
 	return true;
 }
 
@@ -107,7 +107,7 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= floor(200.0f * dt);
 
-	App->map->Draw();
+	/*App->map->Draw();
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
@@ -117,7 +117,7 @@ bool j1Scene::Update(float dt)
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(),
 					map_coordinates.x, map_coordinates.y);
-
+					
 	//App->win->SetTitle(title.GetString());
 
 	// Debug pathfinding ------------------------------
@@ -136,7 +136,7 @@ bool j1Scene::Update(float dt)
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
-
+	*/
 	return true;
 }
 

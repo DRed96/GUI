@@ -76,21 +76,22 @@ const SDL_Texture* j1Gui::GetAtlas() const
 
 // class Gui ---------------------------------------------------
 
-void j1Gui::createImage(SDL_Rect& _section, SDL_Texture* _tex, const int x, const int y)
+void j1Gui::createImage(SDL_Rect& _section, SDL_Texture* _tex,  int x,  int y)
 {
+	SDL_Texture* used_tex = _tex;
 	if (_tex == NULL)
 	{
-		_tex = atlas;
+		used_tex = atlas;
 	}
 
-	GuiElement* ret = new GuiImage(_section, _tex);
+	GuiElement* ret = new GuiImage(_section, used_tex);
 	ret->SetPosition(x, y);
 
 	guis.add(ret);
 
 }
 
-void j1Gui::createLabel(char * _string, const int x, const int y)
+void j1Gui::createLabel(char * _string,  int x,  int y)
 {
 	if (_string != NULL)
 	{
@@ -99,6 +100,22 @@ void j1Gui::createLabel(char * _string, const int x, const int y)
 
 		guis.add(ret);
 	}
+}
+
+void j1Gui::createButton(SDL_Rect & _idle, SDL_Rect & _hover, SDL_Rect &_active , SDL_Texture* _tex, int x, int y)
+{
+	//Use atlas as default
+	SDL_Texture* used_tex = _tex;
+	if (_tex == NULL)
+	{
+		used_tex = atlas;
+	}
+
+	//What happens if you use sdl texture reference?
+	GuiElement* ret = new GuiButton(*used_tex, _idle, _hover, _active);
+	ret->SetPosition(x, y);
+
+	guis.add(ret);
 }
 
 bool j1Gui::checkMouseHover()
@@ -119,12 +136,20 @@ bool j1Gui::checkMouseHover()
 		{
 			if (m_y > rect.y && m_y < (rect.y + rect.h))
 			{
+				LOG("Mouse Enter");
 				inside = true;
 				it->data->onAction(mouse_enter);
+				if (App->input->GetMouseButtonDown(KEY_DOWN) == KEY_DOWN || App->input->GetMouseButtonDown(KEY_REPEAT) == KEY_REPEAT)
+				{
+					LOG("Mouse Clicked");
+
+					it->data->onAction(mouse_click);
+				}
 			}
 		}
-		if (!inside && it->data->current_state == (gui_hover || gui_action))
+		if (!inside && it->data->current_state == (gui_hover || gui_action)) //Aquest operador boolea no esta ben posat
 		{
+			LOG("Mouse Left");
 			it->data->onAction(mouse_leave);
 		}
 		it = it->next;
