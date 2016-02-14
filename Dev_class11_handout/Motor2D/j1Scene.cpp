@@ -49,7 +49,7 @@ bool j1Scene::Start()
 	// TODO 3: Create the image (rect {485, 829, 328, 103}) and the text "Hello World" as UI elements
 	App->gui->createLabel("This is a test", 400, 10);
 	App->gui->createImage(SDL_Rect{ 485, 829, 328, 103 }, NULL, 350, 50);
-	App->gui->createButton(SDL_Rect{ 0, 113, 229, 69 }, SDL_Rect{ 642, 169, 229, 69 }, SDL_Rect{ 411, 169, 229, 69 }, NULL, 350, 70);
+	App->gui->createButton(SDL_Rect{ 0, 113, 229, 69 }, SDL_Rect{ 642, 169, 229, 69 }, SDL_Rect{ 411, 169, 229, 69 }, NULL, 350, 200);
 	return true;
 }
 

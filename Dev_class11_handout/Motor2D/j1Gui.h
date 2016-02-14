@@ -5,6 +5,7 @@
 
 #define CURSOR_WIDTH 2
 
+enum mouse_states;
 // TODO 1: Create your structure of classes
 class GuiElement;
 
@@ -44,16 +45,18 @@ public:
 	//Const, how?
 
 	//Checks mouse hover
-	bool checkMouseHover();
+	bool checkMouseHover(GuiElement*);
 
 	const SDL_Texture* GetAtlas() const;
 private:
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 
+	
 	p2List<GuiElement*> guis;
 
-	
+	GuiElement* currentGui;
+	mouse_states current_mouse;
 };
 
 #endif // __j1GUI_H__

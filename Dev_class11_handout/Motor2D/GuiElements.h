@@ -7,7 +7,8 @@ enum mouse_states
 {
 	mouse_enter,
 	mouse_leave,
-	mouse_click
+	mouse_click,
+	mouse_unknown
 };
 
 enum gui_states
@@ -84,6 +85,7 @@ private:
 	
 	//Texture rects
 	SDL_Texture* texture;
+	SDL_Rect* current_section;
 	SDL_Rect idle;
 	SDL_Rect hover;
 	SDL_Rect action;

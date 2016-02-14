@@ -57,6 +57,8 @@ GuiButton::GuiButton(SDL_Texture& _tex, SDL_Rect & _idle, SDL_Rect & _hover, SDL
 	hover = _hover;
 	action = _action;
 	
+	current_section = &idle;
+
 	posRect.w = _idle.w;
 	posRect.h = _idle.h;
 }
@@ -66,16 +68,16 @@ void GuiButton::onAction(mouse_states _state)
 	switch (_state)
 	{
 	case mouse_enter:
-		current_state = gui_hover;
+		current_section = &hover;
 		break;
 
 	case mouse_click:
-		current_state = gui_action;
+		current_section = &action;
 		break;
 
 	case mouse_leave:
 	default:
-		current_state = gui_idle;
+		current_section = &idle;
 		break;
 	}
 }
@@ -83,17 +85,6 @@ void GuiButton::onAction(mouse_states _state)
 void GuiButton::Draw()
 {
 	//The used seciton will be idle by default
-	SDL_Rect used_section = idle;
-
-	switch (current_state)
-	{
-	case gui_hover:
-		used_section = hover;
-		break;
-	case gui_action:
-		used_section = action;
-		break;
-	}
-	App->render->Blit(texture, posRect.x, posRect.y, &used_section, 0.0f);
+	App->render->Blit(texture, posRect.x, posRect.y, current_section, 0.0f);
 }
 //-------------

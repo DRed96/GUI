@@ -32,7 +32,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
-
+	current_mouse = mouse_unknown;
 	return true;
 }
 
@@ -44,7 +44,113 @@ bool j1Gui::PreUpdate()
 
 bool j1Gui::Update(float dt)
 {
-	checkMouseHover();
+	/*
+	-Iterate the guis
+	-Checks hover if the mouse is not already inside
+	-If it detects new hover, state is mouse_enter
+	-If enter it sends 1 event of mouse enter
+	*/
+	p2List_item<GuiElement*>*it = guis.start;
+
+	bool hover = false;
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
+	{
+		char debug = '\0';
+	}
+
+	bool inside = false;
+
+	switch (current_mouse)
+	{
+
+	case mouse_click:
+	case mouse_enter:
+	{
+		j1KeyState mouse = App->input->GetMouseButtonDown(SDL_BUTTON_LEFT);
+
+		
+		if (mouse == KEY_DOWN || mouse == KEY_REPEAT)
+		{
+			if (current_mouse != mouse_click)
+			{
+				current_mouse = mouse_click;
+				currentGui->onAction(current_mouse);
+				LOG("Mouse click!");
+			}
+		}
+		else if (current_mouse == mouse_click)
+		{
+			current_mouse = mouse_enter;
+			currentGui->onAction(current_mouse);
+			LOG("Mouse unclick!");
+		}
+
+		if (checkMouseHover(currentGui) == false)
+		{
+			current_mouse = mouse_leave;
+			currentGui->onAction(current_mouse);
+
+			currentGui = NULL;
+			LOG("Mouse left!");
+		}
+	}
+		break;
+
+	case mouse_leave:
+	case mouse_unknown:
+	default:
+		while (it != NULL && !hover)
+		{
+			if (checkMouseHover(it->data) == true)
+			{
+				current_mouse = mouse_enter;
+				it->data->onAction(current_mouse);
+				hover = true;
+
+				currentGui = it->data;
+				LOG("Mouse inside!");
+			}
+			it = it->next;
+		}
+		break;
+	}
+	/*
+	while (it != NULL && current_mouse != mouse_enter)
+	{
+		if (checkMouseHover(it->data) == true)
+		{
+			current_mouse = mouse_enter;
+			it->data->onAction(mouse_enter);
+
+			currentGui = it->data;
+			LOG("Mouse inside!");
+		}
+		it = it->next;
+	}
+
+	if (current_mouse == mouse_enter)
+	{
+		j1KeyState mouse = App->input->GetMouseButtonDown(SDL_BUTTON_LEFT);
+
+		if (mouse == KEY_DOWN)
+		{
+			//current_mouse = mouse_click;
+			currentGui->onAction(mouse_click);
+			LOG("Mouse click!");
+		}
+	//	else
+   //		currentGui->onAction(mouse_enter);
+
+		if (checkMouseHover(currentGui) == false)
+		{
+			current_mouse = mouse_leave;
+			currentGui->onAction(mouse_leave);
+
+			currentGui = NULL;
+			LOG("Mouse left!");
+		}
+	}
+	*/
 	return true;
 }
 
@@ -118,41 +224,39 @@ void j1Gui::createButton(SDL_Rect & _idle, SDL_Rect & _hover, SDL_Rect &_active 
 	guis.add(ret);
 }
 
-bool j1Gui::checkMouseHover()
+bool j1Gui::checkMouseHover(GuiElement* element)
 {
-	p2List_item<GuiElement*>*it = guis.start;
 
 	bool inside = false;
+	
+	int m_x, m_y;
+	App->input->GetMousePosition(m_x, m_y);
 
-	while (it != NULL)
+	SDL_Rect rect = element->GetPosRect();
+
+	//Check collsion
+	if (m_x > rect.x && m_x < (rect.x + rect.w))
 	{
-		int m_x, m_y;
-		App->input->GetMousePosition(m_x, m_y);
-
-		SDL_Rect rect = it->data->GetPosRect();
-
-		//Check collsion
-		if (m_x > rect.x && m_x < (rect.x + rect.w))
+		if (m_y > rect.y && m_y < (rect.y + rect.h))
 		{
-			if (m_y > rect.y && m_y < (rect.y + rect.h))
-			{
-				LOG("Mouse Enter");
-				inside = true;
-				it->data->onAction(mouse_enter);
-				if (App->input->GetMouseButtonDown(KEY_DOWN) == KEY_DOWN || App->input->GetMouseButtonDown(KEY_REPEAT) == KEY_REPEAT)
-				{
-					LOG("Mouse Clicked");
-
-					it->data->onAction(mouse_click);
-				}
-			}
+			inside = true;
 		}
-		if (!inside && it->data->current_state == (gui_hover || gui_action)) //Aquest operador boolea no esta ben posat
-		{
-			LOG("Mouse Left");
-			it->data->onAction(mouse_leave);
-		}
-		it = it->next;
 	}
-	return false;
+
+	return inside;
 }
+
+/*	LOG("Mouse Enter");
+			inside = true;
+			it->data->onAction(mouse_enter);
+			if (App->input->GetMouseButtonDown(KEY_DOWN) == KEY_DOWN || App->input->GetMouseButtonDown(KEY_REPEAT) == KEY_REPEAT)
+			{
+				LOG("Mouse Clicked");
+					it->data->onAction(mouse_click);
+					}
+	if (!inside && it->data->current_state == (gui_hover || gui_action)) //Aquest operador boolea no esta ben posat
+	{
+		LOG("Mouse Left");
+		it->data->onAction(mouse_leave);
+	}
+					*/
