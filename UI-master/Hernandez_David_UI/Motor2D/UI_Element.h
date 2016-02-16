@@ -175,9 +175,9 @@ class UIButton : public UIElement
 private:
 	SDL_Texture* texture;
 	SDL_Rect rect[3];
-
-	ButtonTypes bType;
 public:
+	ButtonTypes bType;
+
 	//Constructor
 	UIButton(int _id, int x, int y, int w, int h, char* path, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect _collider = { 0, 0, 0, 0 });
 	UIButton(int _id, int x, int y, int w, int h, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect _collider = { 0, 0, 0, 0 });

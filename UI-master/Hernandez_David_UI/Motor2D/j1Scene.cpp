@@ -240,6 +240,11 @@ void j1Scene::GUIEvent(UIElement* element, GUI_EVENTS event)
 		total = 100;
 		part = floor(slider->GetValor() * 100);
 	}
+	//MODIFIED---------------
+	if (event == UI_MOUSE_DOWN && element->bType == ZERG_UNIT_GEN)
+	{
+		LOG("Zerg Unit generated, really professional i know");
+	}
 }
 
 void j1Scene::GenerateUI(pugi::xml_node& conf)
@@ -378,5 +383,6 @@ void j1Scene::GenerateUI(pugi::xml_node& conf)
 	//Test Button
 	UIButton* test = App->gui->CreateUIButton(SDL_Rect{ 37, 35, 0, 0 }, "gui/Sprites_test.png", SDL_Rect{ 1, 3, 42, 38 }, SDL_Rect{ 1, 4, 42, 38 }, SDL_Rect{ 1, 5, 42, 38 });
 	test->movable = true;
+	test->bType = ZERG_UNIT_GEN;
 	test->AddListener(this);
 }
