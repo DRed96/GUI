@@ -90,4 +90,17 @@ private:
 	SDL_Rect hover;
 	SDL_Rect action;
 };
+/*
+class GuiWindow : public GuiElement
+{
+public:
+	GuiWindow();
+	~GuiWindow(){}
+private:
+	GuiImage image;
+	GuiLabel title;
+
+};*/
+
+
 #endif // !GUI_ELEMENTS_H

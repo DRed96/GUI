@@ -87,4 +87,12 @@ void GuiButton::Draw()
 	//The used seciton will be idle by default
 	App->render->Blit(texture, posRect.x, posRect.y, current_section, 0.0f);
 }
+//GuiWindow-------------
+/*GuiWindow::GuiWindow()
+{
+}
+
+GuiWindow::~GuiWindow()
+{
+}*/
 //-------------
