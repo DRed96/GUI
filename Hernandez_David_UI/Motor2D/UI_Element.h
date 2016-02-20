@@ -16,9 +16,10 @@
 
 #include "p2DynArray.h"
 
+
 #define KEY_REPEAT_DELAY 0.1f
 
-
+class Order;
 /*--------------------------------Basic UI class--------------------------------*/
 
 class UIElement
@@ -175,8 +176,10 @@ class UIButton : public UIElement
 private:
 	SDL_Texture* texture;
 	SDL_Rect rect[3];
-
+	
 public:
+	
+	Order* order;
 	//Constructor
 	UIButton(int _id, int x, int y, int w, int h, char* path, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect _collider = { 0, 0, 0, 0 });
 	UIButton(int _id, int x, int y, int w, int h, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect _collider = { 0, 0, 0, 0 });

@@ -6,6 +6,7 @@
 
 #include "j1Console.h"
 
+#include "j1Order.h"
 //////////////////////////////////////////////////////////
 //														//
 //					Ctrl+M+O							//
@@ -283,6 +284,7 @@ UIButton::UIButton(int _id, int x, int y, int w, int h, char* path, SDL_Rect but
 	rect[0] = button;
 	rect[1] = hover;
 	rect[2] = clicked;
+	order = NULL;
 }
 
 UIButton::UIButton(int _id, int x, int y, int w, int h, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
@@ -291,6 +293,7 @@ UIButton::UIButton(int _id, int x, int y, int w, int h, SDL_Rect button, SDL_Rec
 	rect[0] = button;
 	rect[1] = hover;
 	rect[2] = clicked;
+	order = NULL;
 }
 
 bool UIButton::PersonalUpdate(float dt)
@@ -299,6 +302,11 @@ bool UIButton::PersonalUpdate(float dt)
 	{
 		LOG("No se pudo dibujar la textura.");
 	}
+	if (order != NULL )
+		if(lastEvent == UI_MOUSE_DOWN)
+		{
+			order->Function();
+		}
 	return true;
 }
 
