@@ -10,6 +10,7 @@
 #include "p2DynArray.h"
 
 class UIButton;
+
 enum orderTypes
 {
 	attack,
@@ -34,15 +35,17 @@ public:
 	void SetType(const orderTypes& nType) { type = nType; }
 
 	orderTypes getType()const { return type; }
+
 	const UIButton* getButton() const { return button; }
+
+	
 
 private:
 	orderTypes type;
 	//The button is asigned later
 	UIButton* button;
-protected:
-	//Little optimization, maybe
-	//j1Orders* ordersMod;
+
+	//Petita forma de saber a quins ui elements reacciona un botó
 };
 
 #pragma region Orders
@@ -66,15 +69,21 @@ class j1Orders : public j1Module
 {
 public:
 
+	bool partial_solution = false;
+
 	// Called when before render is available
 	bool Awake(pugi::xml_node&);
+
+	// Called before all Updates
+	bool PreUpdate();
+
+	//void GUIEvent(UIElement* element, GUI_EVENTS event);
 
 	//Add an order to the list and assign it a button
 	void addOrder(Order&, UIButton*);
 
-	//void GUIEvent(UIElement* element, GUI_EVENTS event);
-
 private:
+	
 	p2DynArray<Order*> orders;
 
 	Gen_Zergling o_genZergling;

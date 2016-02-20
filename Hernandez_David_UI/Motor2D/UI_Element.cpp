@@ -302,11 +302,14 @@ bool UIButton::PersonalUpdate(float dt)
 	{
 		LOG("No se pudo dibujar la textura.");
 	}
-	if (order != NULL )
-		if(lastEvent == UI_MOUSE_DOWN)
+	/*if (order != NULL)
+	{
+		if (lastEvent == UI_MOUSE_DOWN)
 		{
 			order->Function();
 		}
+	}
+	*/
 	return true;
 }
 

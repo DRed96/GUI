@@ -17,6 +17,7 @@ bool j1Orders::Awake(pugi::xml_node&)
 	test->movable = true;
 	UILabel* text = App->gui->CreateUILabel({ 115, 18, 0, 0 }, "Generate zergling", "fonts/open_sans/OpenSans-Regular.ttf", 18, UI_AlignCenter);
 	text->SetParent(test);
+	
 	test->AddListener((j1Module*)App->scene);
 
 	//test->AddListener(this);
@@ -28,6 +29,27 @@ bool j1Orders::Awake(pugi::xml_node&)
 	return true;
 }
 
+bool j1Orders::PreUpdate()
+{
+	
+	for (unsigned int i = 0; i < orders.Count(); i++)
+	{
+		UIElement* element = (UIElement*) orders[i]->getButton();
+		if (element->GetLastEvent() == UI_MOUSE_DOWN)
+		{
+			if (partial_solution == false)
+			{
+				partial_solution = true;
+				orders[i]->Function();
+			}
+		}
+		else if (element->GetLastEvent() != UI_MOUSE_DOWN)
+		{
+			partial_solution = false;
+		}
+	}
+	return true;
+}
 //Set a sistem of GUI events like in the scene
 //Try bools in every button, not really cool
 //Pointers in every button
