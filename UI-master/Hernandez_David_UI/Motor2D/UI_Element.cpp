@@ -311,11 +311,7 @@ bool UIButton::Draw()
 	case UI_KEYBOARD_FOCUSED: {}
 	case UI_MOUSE_UP: {toDraw = rect[1]; localPosition.w = rect[1].w; localPosition.h = rect[1].h; break; }
 	case UI_KEYBOARD_CLICK: {}
-	case UI_MOUSE_DOWN: {
-		toDraw = rect[2]; localPosition.w = rect[2].w; localPosition.h = rect[2].h;
-		SendEvent(lastEvent); 
-		break; 
-	}
+	case UI_MOUSE_DOWN: { toDraw = rect[2]; localPosition.w = rect[2].w; localPosition.h = rect[2].h; break; }
 	default: { toDraw = rect[0]; localPosition.w = rect[0].w; localPosition.h = rect[0].h; break; }
 	}
 	if (texture)
