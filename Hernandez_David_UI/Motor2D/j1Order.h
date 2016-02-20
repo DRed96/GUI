@@ -26,22 +26,23 @@ enum unitTypes
 class Order
 {
 public:
-	Order(orderTypes _type){ type = _type; /*ordersMod = App->orders;*/ button = NULL; }
+	Order(){/* type = _type; ordersMod = App->orders;*/ button = NULL; }
 
 	virtual void Function(){}
 
 	//Setters & Getters
 	void SetButton(UIButton& nButt){ button = &nButt; }
-	void SetType(const orderTypes& nType) { type = nType; }
 
-	orderTypes getType()const { return type; }
+		//void SetType(const orderTypes& nType) { type = nType; }
+
+		//orderTypes getType()const { return type; }
 
 	const UIButton* getButton() const { return button; }
 
 	
 
 private:
-	orderTypes type;
+		//orderTypes type;
 	//The button is asigned later
 	UIButton* button;
 
@@ -52,7 +53,7 @@ private:
 //Orders
 struct Gen_Zergling : public Order
 {
-	Gen_Zergling() :Order(gen_zergling){}
+	Gen_Zergling() :Order(){}
 	void Function()
 	{
 		/*
@@ -61,6 +62,20 @@ struct Gen_Zergling : public Order
 		*/
 		//ordersMod->Generate_Zergling();
 		LOG("Generate Zergling");
+	}
+};
+
+struct Attack : public Order
+{
+	Attack() :Order(){}
+	void Function()
+	{
+		/*
+		Maybe
+		ordersMod->GenerateUnit(Zergling);
+		*/
+		//ordersMod->Generate_Zergling();
+		LOG("Attack!");
 	}
 };
 #pragma endregion
@@ -87,7 +102,7 @@ private:
 	p2DynArray<Order*> orders;
 
 	Gen_Zergling o_genZergling;
-
+	Attack o_attack;
 };
 
 
