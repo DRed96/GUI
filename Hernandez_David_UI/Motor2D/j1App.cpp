@@ -16,6 +16,7 @@
 #include "j1Fonts.h"
 #include "j1Gui.h"
 #include "j1Console.h"
+#include "j1Order.h"
 #include "j1App.h"
 
 
@@ -36,6 +37,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	font = new j1Fonts();
 	gui = new j1Gui();
 	console = new j1Console();
+	orders = new j1Orders();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -58,6 +60,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(render);
 
 	AddModule(console);
+	//Maybe orders should be load before entities
+	//Must be loaded after the UI
+	AddModule(orders);
 
 	PERF_PEEK(ptimer);
 }

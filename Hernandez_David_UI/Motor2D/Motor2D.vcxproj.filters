@@ -64,6 +64,9 @@
     <ClCompile Include="j1CVar.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1Order.cpp">
+      <Filter>Desenvolupament  ========\Orders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="j1Console.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="j1Order.h">
+      <Filter>Desenvolupament  ========\Orders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
@@ -166,6 +172,9 @@
     </Filter>
     <Filter Include="Desenvolupament  ========\Modules\UI_Elements">
       <UniqueIdentifier>{b9a69114-0856-4df7-848f-f91b656b041f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Desenvolupament  ========\Orders">
+      <UniqueIdentifier>{6e6a0b37-f8eb-4cd4-ae01-b16dcae3050a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

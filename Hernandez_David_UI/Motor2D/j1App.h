@@ -21,7 +21,7 @@ class j1Pathfinding;
 class j1Fonts;
 class j1Gui;
 class j1Console;
-
+class j1Orders;
 
 class j1App
 {
@@ -99,6 +99,7 @@ public:
 	j1Fonts*			font = NULL;
 	j1Gui*				gui = NULL;
 	j1Console*			console = NULL;
+	j1Orders*			orders = NULL;
 
 	bool initialized = false;
 	bool showTimes = false;
