@@ -31,7 +31,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	focus = NULL;
-	
+	panel.Initialize();
 	return true;
 }
 
@@ -220,4 +220,17 @@ bool j1Gui::Save(pugi::xml_node& data) const
 	}
 
 	return true;
+}
+
+//Grid-------------
+
+void Grid3x3::Initialize()
+{
+	//with and height
+	frame = App->gui->CreateUIRect({ 496, 355, 135, 118 }, 0, 0, 0, 0);
+}
+
+Grid3x3::~Grid3x3()
+{
+
 }

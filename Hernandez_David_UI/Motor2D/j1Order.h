@@ -11,42 +11,24 @@
 
 class UIButton;
 
-enum orderTypes
-{
-	attack,
-	gen_zergling
-};
-
-enum unitTypes
-{
-	zergling
-};
-
-
 class Order
 {
 public:
-	Order(){/* type = _type; ordersMod = App->orders;*/ button = NULL; }
+	Order(){ button = NULL; }
 
 	virtual void Function(){}
 
 	//Setters & Getters
 	void SetButton(UIButton& nButt){ button = &nButt; }
 
-		//void SetType(const orderTypes& nType) { type = nType; }
-
-		//orderTypes getType()const { return type; }
-
 	const UIButton* getButton() const { return button; }
 
 	
 
 private:
-		//orderTypes type;
-	//The button is asigned later
 	UIButton* button;
 
-	//Petita forma de saber a quins ui elements reacciona un botó
+	
 };
 
 #pragma region Orders
@@ -89,10 +71,7 @@ public:
 	// Called when before render is available
 	bool Awake(pugi::xml_node&);
 
-	// Called before all Updates
-	bool PreUpdate();
-
-	//void GUIEvent(UIElement* element, GUI_EVENTS event);
+	void GUIEvent(UIElement* element, GUI_EVENTS event);
 
 	//Add an order to the list and assign it a button
 	void addOrder(Order&, UIButton*);
