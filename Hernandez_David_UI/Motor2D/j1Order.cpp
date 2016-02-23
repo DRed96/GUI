@@ -13,13 +13,21 @@ void j1Orders::addOrder(Order& nOrder, UIButton* nButt)
 bool j1Orders::Awake(pugi::xml_node&)
 {
 
-	UIButton* test = App->gui->CreateUIButton({ 20, 50, 0, 0 }, { 0, 113, 229, 69 }, { 411, 169, 229, 69 }, { 642, 169, 229, 69 }, { 12, 10, 200, 47 });
+	Grid3x3 panel;
+
+	addOrder(o_genProbe_toss);
+	addOrder(o_attack);
+
+	panel.setOrder(o_genProbe_toss, SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 467, 102, 32, 32 }, SDL_Rect{ 466, 102, 32, 32 }, 0, 0, "graphics/cmdicons.png");
+	panel.setOrder(o_attack, SDL_Rect{ 252, 442, 32, 32 }, SDL_Rect{ 252, 443, 32, 32 }, SDL_Rect{ 252, 441, 32, 32 }, 1, 0, "graphics/cmdicons.png");
+
+	/*UIButton* test = App->gui->CreateUIButton({ 20, 50, 0, 0 }, { 0, 113, 229, 69 }, { 411, 169, 229, 69 }, { 642, 169, 229, 69 }, { 12, 10, 200, 47 });
 	test->movable = false;
 	
 	test->AddListener(this);
 
 	test->order = &o_genZergling;
-	addOrder(o_genZergling,test);
+	
 	
 	
 	UIButton* test2;
@@ -27,8 +35,8 @@ bool j1Orders::Awake(pugi::xml_node&)
 
 	test2->AddListener(this);
 
-	test->order = &o_attack;
-	addOrder(o_attack, test2);
+	test->order = &o_attack;*/
+	
 	
 		//App->gui->panel.Initialize();
 	return true;
@@ -50,8 +58,6 @@ void  j1Orders::GUIEvent(UIElement* element, GUI_EVENTS event)
 			}
 		}		
 	}
-
-	
 }
 #pragma endregion
 
@@ -68,14 +74,18 @@ Grid3x3::Grid3x3()
 	//{506,398} {552,398} {598,398}
 	//{506,438} {552,438} {598,438}
 
-	//Button W 33
-	//Buttons H 33
-	//X entre butons 15
-	//Y entre butons 8
+	//Button W 32
+	//Buttons H 32
+	//X entre butons 4 Tileset
+	//Y entre butons 3 Tileset
+
+	//X entre butons 15 UI
+	//Y entre butons 8 UI
+
 	//1st Button pos {10,3}
 
-	measures.x = 33;
-	measures.y = 33;
+	measures.x = 32;
+	measures.y = 32;
 
 	pos1 = { 10, 3 };
 
@@ -105,7 +115,7 @@ Grid3x3::Grid3x3()
 	*/
 }
 
-bool Grid3x3::setOrder(Order& order, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path, unsigned int width, unsigned int height, SDL_Rect collider)
+bool Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	bool ret = true;
 	if (index_col > 2 && index_row > 2)
@@ -119,7 +129,9 @@ bool Grid3x3::setOrder(Order& order, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& 
 
 		unsigned int pX = pos1.x + (button_distance.x *index_col);
 		unsigned int pY = pos1.y + (button_distance.y *index_row);
+
 		UIButton* created = App->gui->CreateUIButton({ pX, pY, width, height }, path, idle, hover, action, collider);
+		created->SetParent(frame);
 		if (created == NULL)
 		{
 			LOG("Error at button creation");
@@ -128,7 +140,7 @@ bool Grid3x3::setOrder(Order& order, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& 
 		else
 		{
 			buttons[result] = created;
-			order.SetButton(*created);
+			assign.SetButton(*created);
 		}
 	}
 

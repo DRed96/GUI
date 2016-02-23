@@ -11,7 +11,11 @@
 
 #include "p2DynArray.h"
 
+#include "p2Point.h"
+
+#include "SDL\include\SDL.h"
 class UIButton;
+class UIRect;
 
 class Order
 {
@@ -33,9 +37,9 @@ private:
 
 #pragma region Orders
 //Orders
-struct Gen_Zergling : public Order
+struct Gen_probe : public Order
 {
-	Gen_Zergling() :Order(){}
+	Gen_probe() :Order(){}
 	void Function()
 	{
 		/*
@@ -79,15 +83,16 @@ public:
 
 	
 private:
-	Gen_Zergling o_genZergling;
+	Gen_probe o_genProbe_toss;
 	Attack o_attack;
 
 	p2DynArray<Order*> orders;
 };
 
 #pragma region Grid3x3
-struct Grid3x3
+class Grid3x3
 {
+public:
 	Grid3x3();
 	~Grid3x3();
 
@@ -95,8 +100,6 @@ struct Grid3x3
 	//Quan es creen els buttons s'ha de tenir en compte el rectangle
 		//void Initialize();
 	
-
-
 	/*
 	Declare an order and assign it a position into de 3x3 Grid
 	(Columns and rows go from 0 to 2)	
@@ -110,8 +113,9 @@ struct Grid3x3
 	RETURN: True on success, false on error
 	Order button WILL be changed
 	*/
-	bool setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path = NULL, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	bool setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path = NULL, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 } );
 
+private:
 
 	UIButton* buttons[GRID_TOTAL];
 
@@ -120,13 +124,15 @@ struct Grid3x3
 
 	// Position of the first button
 	p2Point<int> pos1;
+
 	//Margin between buttons
 	p2Point<unsigned int> margin;
+
 	//Width and height of the buttons
 	p2Point <unsigned int> measures;
+
 	//Measures + margin sum
 	p2Point <unsigned int> button_distance;
-			//p2Point <int> postions[GRID_TOTAL];
 };
 
 #pragma endregion

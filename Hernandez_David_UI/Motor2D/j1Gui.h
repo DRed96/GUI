@@ -197,8 +197,6 @@ public:
 	p2List<UIElement*> keyboardFocuseable;
 
 	UIElement* focus;
-
-	Grid3x3 panel;
 private:
 	
 	SDL_Texture* atlas;
