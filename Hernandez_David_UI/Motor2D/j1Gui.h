@@ -11,7 +11,7 @@
 
 #define N_GUI_LAYERS 3
 
-#define GRID_TOTAL 9
+
 #pragma region GUI
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -206,22 +206,4 @@ private:
 };
 #pragma endregion
 
-#pragma region Grid3x3
-struct Grid3x3
-{
-	Grid3x3(){};
-	~Grid3x3();
-
-	//Needs to be called after modules are ready
-	//Quan es creen els buttons s'ha de tenir en compte el rectangle
-	void Initialize();
-
-	UIButton* buttons[GRID_TOTAL];
-	UIRect*  frame;
-
-	p2Point <unsigned int> measures;
-	p2Point <int> postions[GRID_TOTAL];
-};
-
-#pragma endregion
 #endif // __j1GUI_H__
