@@ -228,6 +228,10 @@ void Grid3x3::Initialize()
 {
 	//with and height
 	frame = App->gui->CreateUIRect({ 496, 355, 135, 118 }, 0, 0, 0, 0);
+	//Forma de guardar les coordenades dels 9 rects
+	//{506,358} {552,358} {598,358}
+	//{506,398} {552,398} {598,398}
+	//{506,438} {552,438} {598,438}
 }
 
 Grid3x3::~Grid3x3()
