@@ -232,6 +232,36 @@ void Grid3x3::Initialize()
 	//{506,358} {552,358} {598,358}
 	//{506,398} {552,398} {598,398}
 	//{506,438} {552,438} {598,438}
+
+	//Button W 33
+	//Buttons H 33
+	//X entre butons 15
+	//Y entre butons 8
+	//1st Button pos {10,3}
+
+	measures.x = 33;
+	measures.y = 33;
+
+	p2Point<int> pos1 = { 10, 3 };
+
+	int x = pos1.x;
+	int y = pos1.y;
+
+	//Buttons.count
+
+	
+	
+	for (unsigned int i2 = 0, y = pos1.y; i2 < 3; i2++) // Y
+	{
+		for (unsigned int i3 = 0, x = pos1.x; i3 < 3; i3++) // X
+		{
+			buttons[(i2 + i3)] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
+			buttons[(i2 + i3)]->SetParent(frame);
+			x += (measures.x + 15);
+		}
+		y += (measures.y + 8);
+	}
+			
 }
 
 Grid3x3::~Grid3x3()
