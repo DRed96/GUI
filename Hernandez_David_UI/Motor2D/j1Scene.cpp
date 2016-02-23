@@ -26,7 +26,7 @@ bool j1Scene::PostAwake(pugi::xml_node& conf)
 	LOG("Loading Scene");
 	bool ret = true;
 	//EXERCISE 3
-	GenerateUI(conf);
+		//GenerateUI(conf);
 
 	return ret;
 }

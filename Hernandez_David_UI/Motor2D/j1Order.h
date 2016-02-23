@@ -23,8 +23,6 @@ public:
 
 	const UIButton* getButton() const { return button; }
 
-	
-
 private:
 	UIButton* button;
 
@@ -66,8 +64,6 @@ class j1Orders : public j1Module
 {
 public:
 
-	bool partial_solution = false;
-
 	// Called when before render is available
 	bool Awake(pugi::xml_node&);
 
@@ -76,13 +72,11 @@ public:
 	//Add an order to the list and assign it a button
 	void addOrder(Order&, UIButton*);
 
+	
+private:
 	Gen_Zergling o_genZergling;
 	Attack o_attack;
-private:
-	
 	p2DynArray<Order*> orders;
-
-	
 };
 
 

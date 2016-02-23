@@ -3,7 +3,7 @@
 #include "j1Order.h"
 
 // --------------- GUI MODULE --------------------------------------------------------
-
+#pragma region GUI
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -31,7 +31,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	focus = NULL;
-	panel.Initialize();
+		//panel.Initialize();
 	return true;
 }
 
@@ -221,12 +221,16 @@ bool j1Gui::Save(pugi::xml_node& data) const
 
 	return true;
 }
+#pragma endregion
 
 //Grid-------------
+#pragma region Grid3x3
+
 
 void Grid3x3::Initialize()
 {
-	//with and height
+	//Frame definition!
+
 	frame = App->gui->CreateUIRect({ 496, 355, 135, 118 }, 0, 0, 0, 0);
 	//Forma de guardar les coordenades dels 9 rects
 	//{506,358} {552,358} {598,358}
@@ -249,17 +253,15 @@ void Grid3x3::Initialize()
 	int x = pos1.x;
 	int y = pos1.y;
 
-	//Buttons.count
-
 	for (unsigned int i2 = 0, y = pos1.y; i2 < 3; i2++) // Y
 	{
 		for (unsigned int i3 = 0, x = pos1.x; i3 < 3; i3++) // X
 		{
 			unsigned int i = (i2 + i3);
-			buttons[i] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
+			/*buttons[i] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
 			buttons[i]->SetParent(frame);
 			buttons[i]->AddListener((j1Module*)App->orders);
-			buttons[i]->order = &App->orders->o_genZergling;
+			buttons[i]->order = &App->orders->o_genZergling;*/
 			x += (measures.x + margin.x);
 		}
 		y += (measures.y + margin.y);
@@ -269,5 +271,10 @@ void Grid3x3::Initialize()
 
 Grid3x3::~Grid3x3()
 {
-
+	//Just in case despite most likely unnecessary
+	for (unsigned int i = GRID_TOTAL; i < GRID_TOTAL; i++)
+	{
+		RELEASE(buttons[i]);
+	}
 }
+#pragma endregion
