@@ -47,7 +47,7 @@ struct Gen_probe : public Order
 		ordersMod->GenerateUnit(Zergling);
 		*/
 		//ordersMod->Generate_Zergling();
-		LOG("Generate Zergling");
+		LOG("Generate Probe");
 	}
 };
 
@@ -93,12 +93,9 @@ private:
 class Grid3x3
 {
 public:
+
 	Grid3x3();
 	~Grid3x3();
-
-	//Needs to be called after modules are ready
-	//Quan es creen els buttons s'ha de tenir en compte el rectangle
-		//void Initialize();
 	
 	/*
 	Declare an order and assign it a position into de 3x3 Grid
@@ -110,10 +107,10 @@ public:
 	-Index_row: Row of the button.
 	-Path: The path of the file where the button is if NULL will use atlas
 	- Width & Heigh: In case you want to resize the button
-	RETURN: True on success, false on error
-	Order button WILL be changed
+	RETURN: Returns a pointer to the created button so it can be edited NULL on fail
+	Order's button WILL be changed
 	*/
-	bool setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path = NULL, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 } );
+	UIButton* setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path = NULL, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 } );
 
 private:
 

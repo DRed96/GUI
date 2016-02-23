@@ -115,13 +115,12 @@ Grid3x3::Grid3x3()
 	*/
 }
 
-bool Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path, unsigned int width, unsigned int height, SDL_Rect collider)
+UIButton* Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path, unsigned int width, unsigned int height, SDL_Rect collider)
 {
-	bool ret = true;
+	UIButton* created = NULL;
 	if (index_col > 2 && index_row > 2)
 	{
 		LOG("Invalid row/column arguments");
-		ret = false;
 	}
 	else
 	{
@@ -130,12 +129,12 @@ bool Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect&
 		unsigned int pX = pos1.x + (button_distance.x *index_col);
 		unsigned int pY = pos1.y + (button_distance.y *index_row);
 
-		UIButton* created = App->gui->CreateUIButton({ pX, pY, width, height }, path, idle, hover, action, collider);
+		created = App->gui->CreateUIButton({ pX, pY, width, height }, path, idle, hover, action, collider);
 		created->SetParent(frame);
+		created->AddListener((j1Module*)App->orders);
 		if (created == NULL)
 		{
 			LOG("Error at button creation");
-			ret = false;
 		}
 		else
 		{
@@ -144,7 +143,7 @@ bool Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect&
 		}
 	}
 
-	return ret;
+	return created;
 }
 
 Grid3x3::~Grid3x3()
