@@ -110,7 +110,7 @@ public:
 
 	void ToLower()
 	{
-		for (int n = 0; n < strlen(str); n++)
+		for (unsigned int n = 0; n < strlen(str); n++)
 		{
 			str[n] = tolower(str[n]);
 		}

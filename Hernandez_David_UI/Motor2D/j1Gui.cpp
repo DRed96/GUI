@@ -1,6 +1,6 @@
 #include "j1Gui.h"
 #include "j1Input.h"
-
+#include "j1Order.h"
 
 // --------------- GUI MODULE --------------------------------------------------------
 
@@ -244,22 +244,25 @@ void Grid3x3::Initialize()
 
 	p2Point<int> pos1 = { 10, 3 };
 
+	p2Point<int> margin = { 15, 8 };
+
 	int x = pos1.x;
 	int y = pos1.y;
 
 	//Buttons.count
 
-	
-	
 	for (unsigned int i2 = 0, y = pos1.y; i2 < 3; i2++) // Y
 	{
 		for (unsigned int i3 = 0, x = pos1.x; i3 < 3; i3++) // X
 		{
-			buttons[(i2 + i3)] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
-			buttons[(i2 + i3)]->SetParent(frame);
-			x += (measures.x + 15);
+			unsigned int i = (i2 + i3);
+			buttons[i] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
+			buttons[i]->SetParent(frame);
+			buttons[i]->AddListener((j1Module*)App->orders);
+			buttons[i]->order = &App->orders->o_genZergling;
+			x += (measures.x + margin.x);
 		}
-		y += (measures.y + 8);
+		y += (measures.y + margin.y);
 	}
 			
 }

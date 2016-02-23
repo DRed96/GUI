@@ -76,12 +76,13 @@ public:
 	//Add an order to the list and assign it a button
 	void addOrder(Order&, UIButton*);
 
+	Gen_Zergling o_genZergling;
+	Attack o_attack;
 private:
 	
 	p2DynArray<Order*> orders;
 
-	Gen_Zergling o_genZergling;
-	Attack o_attack;
+	
 };
 
 
