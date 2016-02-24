@@ -26,11 +26,12 @@ bool j1Orders::Awake(pugi::xml_node&)
 
 	SDL_Texture* backbutton = App->tex->Load("graphics/pcmdbtns.png");
 
-	//UIImage* bad = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 0, 0 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0,0,0,0 });
 
 	UIButton2* test = App->gui->CreateUIButton2(SDL_Rect{ 50, 50, 0, 0 }, backbutton, NULL, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true);
 
-	//bad->SetParent(test);
+	UIImage* bad = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 32, 32 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0,0,0,0 });
+
+	bad->SetParent(test);
 
 	/*UIButton* test = App->gui->CreateUIButton({ 20, 50, 0, 0 }, { 0, 113, 229, 69 }, { 411, 169, 229, 69 }, { 642, 169, 229, 69 }, { 12, 10, 200, 47 });
 	test->movable = false;

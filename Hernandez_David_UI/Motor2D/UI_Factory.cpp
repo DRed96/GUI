@@ -96,7 +96,9 @@ UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, SDL_Texture* tex, UI
 	int id = UIElements.count();
 
 	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, tex, _button, _clicked, _icon, _toRender, collider);
-				UIElements.add(generated);
+
+	UIElements.add(generated);
+
 	generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
 
 	if (generated->collider.w == 0 || generated->collider.h == 0)
