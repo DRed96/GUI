@@ -72,7 +72,7 @@ void j1Console::Execute(p2SString input)
 	//Printing arguments on the console
 	p2SString outputConsole;
 	outputConsole += toSend->At(0)->GetString();
-	for (int n = 1; n < toSend->Count(); n++)
+	for (unsigned int n = 1; n < toSend->Count(); n++)
 	{
 		outputConsole += " / ";
 		outputConsole += toSend->At(n)->GetString();

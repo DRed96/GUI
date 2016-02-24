@@ -335,7 +335,7 @@ bool UIButton::Draw()
 //--------------- UI_BUTTON2 --------------------------------------------------------
 #pragma region UI_BUTTON_2
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
 {
 	back = App->tex->Load(path);
 	rect[0] = button;
@@ -344,13 +344,13 @@ UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_
 	icon = _icon;
 
 	toRender = _toRender;
-	avaliable = _avaliable;
+	avaliable = true;
 
 	order = NULL;
 	
 }
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
 {
 	icon = NULL;
 	back = NULL;
@@ -358,13 +358,13 @@ UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button
 	rect[1] = clicked;
 
 	toRender = _toRender;
-	avaliable = _avaliable;
+	avaliable = true;
 
 	order = NULL;
 }
 
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
 {
 	back = _buttons;
 	icon = _icon;
@@ -372,7 +372,7 @@ UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons,
 	rect[1] = clicked;
 
 	toRender = _toRender;
-	avaliable = _avaliable;
+	avaliable = true;
 
 	order = NULL;
 }
@@ -413,6 +413,7 @@ bool UIButton2::Draw()
 				localPosition.h = rect[1].h;
 				break;
 			}
+			default: { toDraw = rect[0]; localPosition.w = rect[0].w; localPosition.h = rect[0].h; break; }
 		}
 	}
 	if (back)
@@ -428,7 +429,8 @@ bool UIButton2::Draw()
 		LOG("Problem at drawing the back of the button");
 	}
 	
-	ret = icon->Draw();
+	if (icon != NULL)
+		ret = icon->Draw();
 
 	return ret;
 }

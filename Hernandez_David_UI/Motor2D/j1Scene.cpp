@@ -199,7 +199,7 @@ bool j1Scene::Update(float dt)
 		}
 		if (path)
 		{
-			for (int n = 0; n < path->Count(); n++)
+			for (unsigned int n = 0; n < path->Count(); n++)
 			{
 				pos = App->map->MapToWorld(path->At(n)->x, path->At(n)->y);
 				App->render->Blit(App->map->data.tilesets[1]->texture, pos.x, pos.y, &picture);

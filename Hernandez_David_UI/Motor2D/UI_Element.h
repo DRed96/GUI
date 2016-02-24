@@ -25,7 +25,8 @@ class Order;
 class UIElement
 {
 protected:
-	
+	bool active;
+
 	UIElementType type;
 	int id;
 
@@ -127,7 +128,7 @@ public:
 
 	//Methods
 	bool PersonalUpdate(float dt);
-
+	
 	bool Draw();
 	bool SetText(char* _text, int _R = -1, int _G = -1, int _B = -1);
 	bool SetText(p2SString _text, int _R = -1, int _G = -1, int _B = -1);
@@ -202,31 +203,12 @@ class UIButton2 : public UIElement
 {
 public:
 	//Constructors
-	/*
-	Creates a 2 states button with an icon over it
-	- Path: Path to the texture that will be used
-	- Button: Rect that will be displayed normally
-	- Clicked: Rect that will be displayed on click
-	- Icon: The yellow image that goes over the frame
-	*/
-	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
-	/*
-	Creates a 2 states button from the Atlas with an icon over it
-	- Button: Rect that will be displayed normally
-	- Clicked: Rect that will be displayed on click
-	- Icon: The yellow image that goes over the frame
-	*/
-	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	
+	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	
+	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
-	/*
-	Creates a 2 states button using a pre loaded texture with an icon over it
-	(Most optimal method)
-	- Back: Texture of the button frame
-	- Button: Rect that will be displayed normally
-	- Clicked: Rect that will be displayed on click
-	- Icon: The yellow image that goes over the frame
-	*/
-	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
 	//Destructor
 	~UIButton2(){}
