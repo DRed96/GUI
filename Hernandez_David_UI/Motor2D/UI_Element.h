@@ -25,7 +25,7 @@ class Order;
 class UIElement
 {
 protected:
-	bool active;
+	
 	UIElementType type;
 	int id;
 
@@ -197,7 +197,6 @@ public:
 };
 
 /*--------------------------------Two state button--------------------------------*/
-
 /*Button similar to the ones in starcraft*/
 class UIButton2 : public UIElement
 {
@@ -210,32 +209,52 @@ public:
 	- Clicked: Rect that will be displayed on click
 	- Icon: The yellow image that goes over the frame
 	*/
-	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
 	/*
-	Creates a 2 states button from the alpha with an icon over it
+	Creates a 2 states button from the Atlas with an icon over it
 	- Button: Rect that will be displayed normally
 	- Clicked: Rect that will be displayed on click
 	- Icon: The yellow image that goes over the frame
 	*/
-	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
-
-	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	/*
+	Creates a 2 states button using a pre loaded texture with an icon over it
+	(Most optimal method)
+	- Back: Texture of the button frame
+	- Button: Rect that will be displayed normally
+	- Clicked: Rect that will be displayed on click
+	- Icon: The yellow image that goes over the frame
+	*/
+	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, bool avaliable = true, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
 	//Destructor
 	~UIButton2(){}
 
 	//Methods
-		//virtual bool PersonalUpdate(float dt);
-		//virtual bool Draw();
 
-		//SDL_Texture* GetTexture() { return texture; }
+	bool PersonalUpdate(float dt);
+
+	bool Draw();
+
+	const SDL_Texture* GetBackTexture() { return back; }
+
 	SDL_Rect GetCurrentRect(int index) { if (index >= 0 && index < 4){ return rect[index]; } return{ 0, 0, 0, 0 }; }
 
-	Order* order;
+public:
+
+	bool avaliable;
+
+	bool toRender;
+
 private:
 
+	//Text label + window
+
+	Order* order;
+
 	UIImage* icon;
+
 	//The image that will actually change
 	SDL_Texture* back;
 	SDL_Rect rect[2];

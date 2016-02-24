@@ -104,6 +104,9 @@ public:
 	*/
 	UIButton* CreateUIButton(SDL_Rect position, SDL_Rect button, SDL_Rect hover, SDL_Rect clicked, SDL_Rect collider = { 0, 0, 0, 0 });
 
+	UIButton2*
+
+
 	/*
 	Load an image and draw an animation through diferents sections of it.
 	--Position: Position on screen. If width or height are 0, size won't change.

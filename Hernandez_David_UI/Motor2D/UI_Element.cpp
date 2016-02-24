@@ -302,14 +302,7 @@ bool UIButton::PersonalUpdate(float dt)
 	{
 		LOG("No se pudo dibujar la textura.");
 	}
-	/*if (order != NULL)
-	{
-		if (lastEvent == UI_MOUSE_DOWN)
-		{
-			order->Function();
-		}
-	}
-	*/
+
 	return true;
 }
 
@@ -340,36 +333,106 @@ bool UIButton::Draw()
 #pragma endregion
 
 //--------------- UI_BUTTON2 --------------------------------------------------------
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
-{
+#pragma region UI_BUTTON_2
 
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+{
 	back = App->tex->Load(path);
 	rect[0] = button;
 	rect[1] = clicked;
-	order = NULL;
+
 	icon = _icon;
 
-	/*texture = App->tex->Load(path);
-	rect[0] = button;
-	rect[1] = hover;
-	rect[2] = clicked;
-	order = NULL;*/
+	toRender = _toRender;
+	avaliable = _avaliable;
+
+	order = NULL;
+	
 }
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
 {
 	icon = NULL;
 	back = NULL;
 	rect[0] = button;
 	rect[1] = clicked;
+
+	toRender = _toRender;
+	avaliable = _avaliable;
+
 	order = NULL;
 }
 
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, bool _avaliable, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
 {
+	back = _buttons;
+	icon = _icon;
+	rect[0] = button;
+	rect[1] = clicked;
 
+	toRender = _toRender;
+	avaliable = _avaliable;
+
+	order = NULL;
 }
+
+bool UIButton2::PersonalUpdate(float dt)
+{
+	if (!Draw())
+	{
+		LOG("Could not draw button!");
+		return false;
+	}
+	else
+		return true;
+}
+
+bool UIButton2::Draw()
+{
+	bool ret = true;
+
+	//Set the rect to draw, then draw the back and then the UI image
+	SDL_Rect toDraw;
+
+	if (avaliable)
+	{
+		switch (lastEvent)
+		{
+			case UI_MOUSE_UP:
+			{
+				toDraw = rect[0];
+				localPosition.w = rect[0].w;
+				localPosition.h = rect[0].h;
+				break;
+			}
+			case UI_MOUSE_DOWN:
+			{
+				toDraw = rect[1];
+				localPosition.w = rect[1].w;
+				localPosition.h = rect[1].h;
+				break;
+			}
+		}
+	}
+	if (back)
+	{
+		ret = App->render->Blit(back, &GetWorldPosition(), &toDraw);
+	}
+	else
+	{
+		ret = App->render->Blit(App->gui->GetAtlas(), &GetWorldPosition(), &toDraw);
+	}
+	if (!ret)
+	{
+		LOG("Problem at drawing the back of the button");
+	}
+	
+	ret = icon->Draw();
+
+	return ret;
+}
+#pragma endregion
 // --------------- UI_IMAGE --------------------------------------------------------
 
 #pragma region UI_IMAGE
