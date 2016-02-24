@@ -156,6 +156,7 @@ public:
 	UIImage(int _id, int x, int y, int w, int h, SDL_Rect _rect, char* path, SDL_Rect _collider = { 0, 0, 0, 0 });
 	UIImage(int _id, int x, int y, int w, int h, char* path, SDL_Rect _collider = { 0, 0, 0, 0 });
 	UIImage(int _id, int x, int y, int w, int h, SDL_Rect _rect, SDL_Rect _collider = { 0, 0, 0, 0 });
+	
 	//Destructor
 	~UIImage();
 
@@ -195,7 +196,50 @@ public:
 
 };
 
+/*--------------------------------Two state button--------------------------------*/
 
+/*Button similar to the ones in starcraft*/
+class UIButton2 : public UIElement
+{
+public:
+	//Constructors
+	/*
+	Creates a 2 states button with an icon over it
+	- Path: Path to the texture that will be used
+	- Button: Rect that will be displayed normally
+	- Clicked: Rect that will be displayed on click
+	- Icon: The yellow image that goes over the frame
+	*/
+	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	/*
+	Creates a 2 states button from the alpha with an icon over it
+	- Button: Rect that will be displayed normally
+	- Clicked: Rect that will be displayed on click
+	- Icon: The yellow image that goes over the frame
+	*/
+	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+
+
+	//UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+
+	//Destructor
+	~UIButton2(){}
+
+	//Methods
+		//virtual bool PersonalUpdate(float dt);
+		//virtual bool Draw();
+
+		//SDL_Texture* GetTexture() { return texture; }
+	SDL_Rect GetCurrentRect(int index) { if (index >= 0 && index < 4){ return rect[index]; } return{ 0, 0, 0, 0 }; }
+
+	Order* order;
+private:
+
+	UIImage* icon;
+	//The image that will actually change
+	SDL_Texture* back;
+	SDL_Rect rect[2];
+};
 
 /*--------------------------------Animation--------------------------------*/
 

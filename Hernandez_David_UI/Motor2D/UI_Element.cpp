@@ -339,7 +339,37 @@ bool UIButton::Draw()
 
 #pragma endregion
 
+//--------------- UI_BUTTON2 --------------------------------------------------------
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+{
 
+	back = App->tex->Load(path);
+	rect[0] = button;
+	rect[1] = clicked;
+	order = NULL;
+	icon = _icon;
+
+	/*texture = App->tex->Load(path);
+	rect[0] = button;
+	rect[1] = hover;
+	rect[2] = clicked;
+	order = NULL;*/
+}
+
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+{
+	icon = NULL;
+	back = NULL;
+	rect[0] = button;
+	rect[1] = clicked;
+	order = NULL;
+}
+
+
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+{
+
+}
 // --------------- UI_IMAGE --------------------------------------------------------
 
 #pragma region UI_IMAGE
