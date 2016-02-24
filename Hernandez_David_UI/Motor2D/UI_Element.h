@@ -220,7 +220,7 @@ public:
 	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
 
-	//UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
 	//Destructor
 	~UIButton2(){}
