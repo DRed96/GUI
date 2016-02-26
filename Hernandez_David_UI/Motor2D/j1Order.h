@@ -4,8 +4,6 @@
 #define GRID_TOTAL 9
 
 //This 2 includes need to be changed to the cpp and also the methods that use them
-#include "j1App.h"
-#include "p2Log.h"
 
 #include "j1Module.h"
 
@@ -13,57 +11,19 @@
 
 #include "p2Point.h"
 
+#include "Orders Factory.h"
+
 #include "SDL\include\SDL.h"
-class UIButton;
+
+
+
+
 class UIRect;
 
-class Order
-{
-public:
-	Order(){ button = NULL; }
-
-	virtual void Function(){}
-
-	//Setters & Getters
-	void SetButton(UIButton& nButt){ button = &nButt; }
-
-	const UIButton* getButton() const { return button; }
-
-private:
-	UIButton* button;
-
-	
-};
 
 #pragma region Orders
 //Orders
-struct Gen_probe : public Order
-{
-	Gen_probe() :Order(){}
-	void Function()
-	{
-		/*
-		Maybe
-		ordersMod->GenerateUnit(Zergling);
-		*/
-		//ordersMod->Generate_Zergling();
-		LOG("Generate Probe");
-	}
-};
 
-struct Attack : public Order
-{
-	Attack() :Order(){}
-	void Function()
-	{
-		/*
-		Maybe
-		ordersMod->GenerateUnit(Zergling);
-		*/
-		//ordersMod->Generate_Zergling();
-		LOG("Attack!");
-	}
-};
 #pragma endregion
 
 class j1Orders : public j1Module

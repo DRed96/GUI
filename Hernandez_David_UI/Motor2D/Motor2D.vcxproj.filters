@@ -64,8 +64,11 @@
     <ClCompile Include="j1CVar.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Order.cpp">
+    <ClCompile Include="Orders Factory.cpp">
       <Filter>Desenvolupament  ========\Orders</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Order.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +151,9 @@
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Order.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Orders Factory.h">
       <Filter>Desenvolupament  ========\Orders</Filter>
     </ClInclude>
   </ItemGroup>
