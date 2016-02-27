@@ -18,36 +18,7 @@
 class UIButton2;
 class UIRect;
 
-class Order
-{
-public:
-	Order(){ button = NULL; }
 
-	virtual void Function(){}
-	//Setters & Getters
-	void SetButton(UIButton2& nButt){ button = &nButt; }
-
-	const UIButton2* getButton() const { return button; }
-
-private:
-	UIButton2* button;
-
-	
-};
-
-#pragma region Orders
-//Orders
-
-struct Attack : public Order
-{
-	Attack() :Order(){}
-	void Function()
-	{
-		LOG("Attack!");
-	}
-};
-
-#pragma endregion
 
 class j1Orders : public j1Module
 {
