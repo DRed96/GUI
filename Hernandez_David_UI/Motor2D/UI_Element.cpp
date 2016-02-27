@@ -335,44 +335,47 @@ bool UIButton::Draw()
 //--------------- UI_BUTTON2 --------------------------------------------------------
 #pragma region UI_BUTTON_2
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider, _toRender)
 {
 	back = App->tex->Load(path);
 	rect[0] = button;
 	rect[1] = clicked;
 
-	icon = _icon;
+		//icon = _icon;
 
-	toRender = _toRender;
+	_icon->SetParent(this);
+
 	avaliable = true;
 
 	order = NULL;
 	
 }
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider, _toRender)
 {
 	icon = NULL;
 	back = NULL;
 	rect[0] = button;
 	rect[1] = clicked;
 
-	toRender = _toRender;
 	avaliable = true;
+
+	_icon->SetParent(this);
 
 	order = NULL;
 }
 
 
-UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider)
+UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider,_toRender)
 {
 	back = _buttons;
 	icon = _icon;
 	rect[0] = button;
 	rect[1] = clicked;
 
-	toRender = _toRender;
 	avaliable = true;
+
+	_icon->SetParent(this);
 
 	order = NULL;
 }

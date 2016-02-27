@@ -227,15 +227,14 @@ public:
 
 	bool avaliable;
 
-	bool toRender;
-
 private:
 
 	//Text label + window
 
 	Order* order;
 
-	UIImage* icon;
+	/*Not necessary at the time*/
+		//UIImage* icon;
 
 	//The image that will actually change
 	SDL_Texture* back;

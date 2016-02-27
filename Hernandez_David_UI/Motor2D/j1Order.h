@@ -14,7 +14,8 @@
 #include "p2Point.h"
 
 #include "SDL\include\SDL.h"
-class UIButton;
+
+class UIButton2;
 class UIRect;
 
 class Order
@@ -25,12 +26,12 @@ public:
 	virtual void Function(){}
 
 	//Setters & Getters
-	void SetButton(UIButton& nButt){ button = &nButt; }
+	void SetButton(UIButton2& nButt){ button = &nButt; }
 
-	const UIButton* getButton() const { return button; }
+	const UIButton2* getButton() const { return button; }
 
 private:
-	UIButton* button;
+	UIButton2* button;
 
 	
 };
@@ -56,11 +57,6 @@ struct Attack : public Order
 	Attack() :Order(){}
 	void Function()
 	{
-		/*
-		Maybe
-		ordersMod->GenerateUnit(Zergling);
-		*/
-		//ordersMod->Generate_Zergling();
 		LOG("Attack!");
 	}
 };
@@ -79,7 +75,7 @@ public:
 	Add an order to the list and assign it a button
 	Recomendended to use with grid3x3 setOrder!!!!!
 	*/
-	void addOrder(Order&, UIButton* = NULL);
+	void addOrder(Order&, UIButton2* = NULL);
 
 	
 private:
@@ -98,23 +94,36 @@ public:
 	~Grid3x3();
 	
 	/*
-	Declare an order and assign it a position into de 3x3 Grid
+	Declare an order and assign it a position into de 3x3 Grid using a texture path
 	(Columns and rows go from 0 to 2)	
 	-Idle: The rect that will normally be displayed
-	-Hover: Hover rect
 	-Click: The one that will appear when using the button
 	-Index_col: Column of the button.
 	-Index_row: Row of the button.
+	-Icon: The image that will be parented to the button
 	-Path: The path of the file where the button is if NULL will use atlas
+	-ToRedender: Will set the bool active to the button and it's sons 
 	- Width & Heigh: In case you want to resize the button
-	RETURN: Returns a pointer to the created button so it can be edited NULL on fail
+	RETURN: Returns a pointer to the created button so it can be edited NULL on error
 	Order's button WILL be changed
 	*/
-	UIButton* setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path = NULL, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 } );
-
+	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, char* path = NULL, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	/*
+	Declare an order and assign it a position into de 3x3 Grid using
+	(Columns and rows go from 0 to 2)
+	-Idle: The rect that will normally be displayed
+	-Click: The one that will appear when using the button
+	-Index_col: Column of the button.
+	-Index_row: Row of the button.
+	-Tex: The texture that will use the button so we just load it once
+	- Width & Heigh: In case you want to resize the button
+	RETURN: Returns a pointer to the created button so it can be edited NULL on error
+	Order's button WILL be changed
+	*/
+	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
 private:
 
-	UIButton* buttons[GRID_TOTAL];
+	UIButton2* buttons[GRID_TOTAL];
 
 	//Invisible frame, parent of all the buttons
 	UIRect*  frame;

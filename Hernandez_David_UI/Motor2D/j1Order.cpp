@@ -3,7 +3,7 @@
 #include "j1Gui.h"
 
 #pragma region Orders
-void j1Orders::addOrder(Order& nOrder, UIButton* nButt)
+void j1Orders::addOrder(Order& nOrder, UIButton2* nButt)
 {
 	if (nButt != NULL)
 		nOrder.SetButton(*nButt);
@@ -30,8 +30,15 @@ bool j1Orders::Awake(pugi::xml_node&)
 	UIButton2* test = App->gui->CreateUIButton2(SDL_Rect{ 50, 50, 0, 0 }, backbutton, NULL, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true);
 
 	UIImage* bad = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 32, 32 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0,0,0,0 });
-
 	bad->SetParent(test);
+
+	// Testing with path NULL
+	
+	UIButton2* test_path = App->gui->CreateUIButton2(SDL_Rect{ 90, 50, 0, 0 }, (char*) NULL, bad, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
+
+	// Testing with path NULL
+
+	UIButton2* test_path2 = App->gui->CreateUIButton2(SDL_Rect{ 120, 50, 0, 0 }, (char*) "graphics/pcmdbtns.png", bad, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
 
 	/*UIButton* test = App->gui->CreateUIButton({ 20, 50, 0, 0 }, { 0, 113, 229, 69 }, { 411, 169, 229, 69 }, { 642, 169, 229, 69 }, { 12, 10, 200, 47 });
 	test->movable = false;
@@ -127,37 +134,55 @@ Grid3x3::Grid3x3()
 	*/
 }
 
-UIButton* Grid3x3::setOrder(Order& assign, SDL_Rect& idle, SDL_Rect& hover, SDL_Rect& action, unsigned int index_col, unsigned int index_row, char* path, unsigned int width, unsigned int height, SDL_Rect collider)
+UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, char* path, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
-	UIButton* created = NULL;
-	if (index_col > 2 && index_row > 2)
+	UIButton2* generated = NULL;
+	if (row_index > 2 || col_index > 2)
 	{
-		LOG("Invalid row/column arguments");
+		LOG("Error at selecting the indexs");
 	}
 	else
 	{
-		unsigned int result = index_col + index_row;
+		unsigned int result = col_index + row_index;
 
-		unsigned int pX = pos1.x + (button_distance.x *index_col);
-		unsigned int pY = pos1.y + (button_distance.y *index_row);
+		unsigned int pX = pos1.x + (button_distance.x *col_index);
+		unsigned int pY = pos1.y + (button_distance.y *row_index);
 
-		created = App->gui->CreateUIButton({ pX, pY, width, height }, path, idle, hover, action, collider);
-		created->SetParent(frame);
-		created->AddListener((j1Module*)App->orders);
-		if (created == NULL)
-		{
-			LOG("Error at button creation");
-		}
-		else
-		{
-			buttons[result] = created;
-			assign.SetButton(*created);
-		}
+
+		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, path, _icon, idle, clicked, _toRender, collider);
+
+		generated->SetParent(frame);
 	}
-
-	return created;
+	return generated;
 }
 
+UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 })
+{
+	UIButton2* generated = NULL;
+	if (row_index > 2 || col_index > 2)
+	{
+		LOG("Error at selecting the indexs");
+	}
+	else
+	{
+		unsigned int result = col_index + row_index;
+
+		unsigned int pX = pos1.x + (button_distance.x *col_index);
+		unsigned int pY = pos1.y + (button_distance.y *row_index);
+
+
+		UIButton2* generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex, _icon, idle, clicked, _toRender, collider);
+
+		generated->SetParent(frame);
+	}
+	return generated;
+}
+/*
+
+
+SDL_Texture* backtex = App->tex->Load(path);
+created = App->gui->CreateUIButton2({ pX, pY, width, height }, path, _icon, idle, action, active, collider);
+*/
 Grid3x3::~Grid3x3()
 {
 	//Just in case despite most likely unnecessary

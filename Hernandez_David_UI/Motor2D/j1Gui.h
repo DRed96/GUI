@@ -112,7 +112,7 @@ public:
 	- Icon: The yellow image that goes over the frame
 	- toRender: Determines if this button will be rendered or not
 	*/
-		//	UIButton2* CreateUIButton2(const SDL_Rect& position, UIImage* _icon, const SDL_Rect& button, const SDL_Rect& clicked, bool _toRender = false, SDL_Rect collider = { 0, 0, 0, 0 });
+			//UIButton2* CreateUIButton2(const SDL_Rect& position, UIImage* _icon, const SDL_Rect& button, const SDL_Rect& clicked, bool _toRender = false, SDL_Rect collider = { 0, 0, 0, 0 });
 
 	/*
 	Creates a 2 states button with an icon over it
@@ -122,7 +122,7 @@ public:
 	- Icon: The yellow image that goes over the frame
 	- toRender: Determines if this button will be rendered or not
 	*/
-		//	UIButton2* CreateUIButton2(const SDL_Rect& position, char* path, UIImage* _icon, const SDL_Rect& button, const SDL_Rect& clicked, bool _toRender = false, SDL_Rect collider = { 0, 0, 0, 0 });
+	UIButton2* CreateUIButton2(const SDL_Rect& position, char* path, UIImage* _icon, const SDL_Rect& button, const SDL_Rect& clicked, bool _toRender = false, SDL_Rect collider = { 0, 0, 0, 0 });
 
 	/*
 	Creates a 2 states button using a pre loaded texture with an icon over it
