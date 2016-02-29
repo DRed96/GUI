@@ -353,7 +353,7 @@ UIButton2::UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_
 
 UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider, _toRender)
 {
-	icon = NULL;
+		//icon = NULL;
 	back = NULL;
 	rect[0] = button;
 	rect[1] = clicked;
@@ -369,13 +369,11 @@ UIButton2::UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button
 UIButton2::UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* _buttons, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon, bool _toRender, const SDL_Rect _collider) : UIElement(UI_Button, _id, x, y, w, h, _collider,_toRender)
 {
 	back = _buttons;
-	icon = _icon;
+		//icon = _icon;
 	rect[0] = button;
 	rect[1] = clicked;
 
 	avaliable = true;
-
-	_icon->SetParent(this);
 
 	order = NULL;
 }
@@ -432,8 +430,8 @@ bool UIButton2::Draw()
 		LOG("Problem at drawing the back of the button");
 	}
 	
-	if (icon != NULL)
-		ret = icon->Draw();
+//	if (icon != NULL)
+	//	ret = icon->Draw();
 
 	return ret;
 }

@@ -2,9 +2,10 @@
 #define _ORDERS_FACTORY_H_
 
 #define NULL 0
-
 class UIButton;
-
+class UIButton2;
+class UIRect;
+class UIImage;
 
 class Order
 {
@@ -14,12 +15,12 @@ public:
 	virtual void Function(){}
 
 	//Setters & Getters
-	void SetButton(UIButton& nButt){ button = &nButt; }
+	void SetButton(UIButton2& nButt){ button = &nButt; }
 
-	const UIButton* getButton() const { return button; }
+	const UIButton2* getButton() const { return button; }
 
 private:
-	UIButton* button;
+	UIButton2* button;
 
 
 };

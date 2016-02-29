@@ -156,7 +156,7 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 	return generated;
 }
 
-UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 })
+UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	UIButton2* generated = NULL;
 	if (row_index > 2 || col_index > 2)

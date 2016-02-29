@@ -96,42 +96,6 @@ UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, SDL_Texture* tex, UI
 	int id = UIElements.count();
 
 	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, tex, _button, _clicked, _icon, _toRender, collider);
-
-	UIElements.add(generated);
-
-	generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
-
-	if (generated->collider.w == 0 || generated->collider.h == 0)
-	{
-		generated->collider.w = _button.w; generated->collider.h = _button.h;
-	}
-
-	return generated;
-}
-/*
-UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
-{
-	int id = UIElements.count();
-
-	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, _button, _clicked, _icon, _toRender, collider);
-
-	UIElements.add(generated);
-
-	generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
-
-	if (generated->collider.w == 0 || generated->collider.h == 0)
-	{
-		generated->collider.w = _button.w; generated->collider.h = _button.h;
-	}
-
-	return generated;
-}*/
-
-UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, char* path, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
-{
-	int id = UIElements.count();
-
-	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h,path, _button, _clicked, _icon, _toRender, collider);
 	
 	UIElements.add(generated);
 
@@ -144,6 +108,44 @@ UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, char* path, UIImage*
 
 	return generated;
 }
+
+
+UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, char* path, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
+{
+	int id = UIElements.count();
+
+	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h,path, _button, _clicked, _icon, _toRender, collider);
+	_icon->SetParent(generated);
+	UIElements.add(generated);
+
+	
+	generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
+
+
+	if (generated->collider.w == 0 || generated->collider.h == 0)
+	{
+		generated->collider.w = _button.w; generated->collider.h = _button.h;
+	}
+
+	return generated;
+}
+
+/*
+UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
+{
+int id = UIElements.count();
+UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, _button, _clicked, _icon, _toRender, collider);
+UIElements.add(generated);
+
+generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
+
+if (generated->collider.w == 0 || generated->collider.h == 0)
+{
+generated->collider.w = _button.w; generated->collider.h = _button.h;
+}
+
+return generated;
+}*/
 UIAnimatedImage* j1Gui::CreateUIAnimatedImage(SDL_Rect position, char* path, SDL_Rect _rect[], uint nFrames, float _speed = 25.0f, SDL_Rect collider)
 {
 	int id = UIElements.count();

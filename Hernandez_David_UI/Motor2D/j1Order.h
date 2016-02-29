@@ -15,8 +15,6 @@
 
 #include "SDL\include\SDL.h"
 
-class UIButton2;
-class UIRect;
 
 
 
