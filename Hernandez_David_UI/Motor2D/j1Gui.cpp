@@ -30,8 +30,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
+	declareGrids();
 	focus = NULL;
-		//panel.Initialize();
 	return true;
 }
 
@@ -220,6 +220,22 @@ bool j1Gui::Save(pugi::xml_node& data) const
 	}
 
 	return true;
+}
+
+void j1Gui::declareGrids()
+{
+	Grid_Coords coords;
+	SDL_Texture* back_b = App->tex->Load("graphics/pcmdbtns.png");
+
+	Grid3x3 nexus(coords);
+
+	UIButton2* button = nexus.setOrder({ 1, 0, 33, 34 }, { 74, 1, 33, 34 }, 0, 0, *back_b, true);
+
+	UIImage* gen_probe = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 31, 31 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0, 0, 0, 0 });
+
+	gen_probe->SetParent(button);	
+
+	return;
 }
 #pragma endregion
 

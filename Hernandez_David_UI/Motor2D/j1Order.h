@@ -42,11 +42,32 @@ private:
 };
 
 #pragma region Grid3x3
+
+struct Grid_Coords
+{
+	Grid_Coords();
+	//~Grid_Coords();
+
+	//Invisible frame, parent of all the buttons
+	UIRect*  frame;
+
+	// Position of the first button
+	p2Point<int> pos1;
+
+	//Margin between buttons
+	p2Point<unsigned int> margin;
+
+	//Width and height of the buttons
+	p2Point <unsigned int> measures;
+
+	//Measures + margin sum
+	p2Point <unsigned int> button_distance;
+};
 class Grid3x3
 {
 public:
 
-	Grid3x3();
+	Grid3x3(Grid_Coords&);
 	~Grid3x3();
 	
 	/*
@@ -63,7 +84,7 @@ public:
 	RETURN: Returns a pointer to the created button so it can be edited NULL on error
 	Order's button WILL be changed
 	*/
-	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, char* path = NULL, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path = NULL, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
 	/*
 	Declare an order and assign it a position into de 3x3 Grid using
 	(Columns and rows go from 0 to 2)
@@ -76,25 +97,18 @@ public:
 	RETURN: Returns a pointer to the created button so it can be edited NULL on error
 	Order's button WILL be changed
 	*/
-	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+
+	/*
+	Change the location of a pregenerated button into a grid, not good for testing
+	*/
+	UIButton2* setOrder(unsigned int row_index, unsigned int col_index, UIButton2 & button);
+
 private:
 
+	Grid_Coords* coords;
+
 	UIButton2* buttons[GRID_TOTAL];
-
-	//Invisible frame, parent of all the buttons
-	UIRect*  frame;
-
-	// Position of the first button
-	p2Point<int> pos1;
-
-	//Margin between buttons
-	p2Point<unsigned int> margin;
-
-	//Width and height of the buttons
-	p2Point <unsigned int> measures;
-
-	//Measures + margin sum
-	p2Point <unsigned int> button_distance;
 };
 
 #pragma endregion

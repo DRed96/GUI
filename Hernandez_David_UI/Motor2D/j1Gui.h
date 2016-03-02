@@ -45,6 +45,7 @@ public:
 
 	void KeyboardFocus();
 
+#pragma region Factory Methods
 	// Factory Methods -----------------
 
 	/*
@@ -217,10 +218,12 @@ public:
 	*/
 	UISlider* j1Gui::CreateUISlider(SDL_Rect position, j1Module* listener, SDL_Rect bar, SDL_Rect thumb, int _leftOffest = 0, int _rightOfset = 0, int _thumbOffset = 0, SDL_Rect _barCollider = { 0, 0, 0, 0 }, SDL_Rect _thumbCollider = { 0, 0, 0, 0 });
 
-	// Gui creation functions
+#pragma endregion
 
 	SDL_Texture* GetAtlas() const;
 
+	void declareGrids();
+public:
 	//Properties
 	bool debug = false;
 	p2List<UIElement*> UIElements;

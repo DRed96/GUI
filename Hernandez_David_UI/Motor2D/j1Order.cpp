@@ -13,6 +13,9 @@ void j1Orders::addOrder(Order& nOrder, UIButton2* nButt)
 bool j1Orders::Awake(pugi::xml_node&)
 {
 
+
+
+
 	/*Grid3x3 panel;
 
 	addOrder(o_genProbe_toss);
@@ -23,7 +26,7 @@ bool j1Orders::Awake(pugi::xml_node&)
 
 
 	//UIButton2 test declaration
-
+	/*
 	SDL_Texture* backbutton = App->tex->Load("graphics/pcmdbtns.png");
 
 
@@ -83,7 +86,7 @@ void  j1Orders::GUIEvent(UIElement* element, GUI_EVENTS event)
 //Grid-------------
 #pragma region Grid3x3
 
-Grid3x3::Grid3x3()
+Grid_Coords::Grid_Coords()
 {
 	//Frame definition!
 	frame = App->gui->CreateUIRect({ 496, 355, 135, 118 }, 0, 0, 0, 0);
@@ -117,24 +120,29 @@ Grid3x3::Grid3x3()
 	int x = pos1.x;
 	int y = pos1.y;
 
-	
+
 	for (unsigned int i2 = 0, y = pos1.y; i2 < 3; i2++) // Y
 	{
-		for (unsigned int i3 = 0, x = pos1.x; i3 < 3; i3++) // X
-		{
-		unsigned int i = (i2 + i3);
-			/*buttons[i] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
-			buttons[i]->SetParent(frame);
-			buttons[i]->AddListener((j1Module*)App->orders);
-			buttons[i]->order = &App->orders->o_genZergling; *
-			x += (measures.x + margin.x);
-		}
+	for (unsigned int i3 = 0, x = pos1.x; i3 < 3; i3++) // X
+	{
+	unsigned int i = (i2 + i3);
+	/*buttons[i] = App->gui->CreateUIButton({ x, y, 0, 0 }, "graphics/cmdicons.png", { 468, 102, 32, 32 }, { 468, 102, 32, 32 }, { 468, 102, 32, 32 });
+	buttons[i]->SetParent(frame);
+	buttons[i]->AddListener((j1Module*)App->orders);
+	buttons[i]->order = &App->orders->o_genZergling; *
+	x += (measures.x + margin.x);
+	}
 	y += (measures.y + margin.y);
 	}
 	*/
 }
 
-UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, char* path, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
+Grid3x3::Grid3x3(Grid_Coords& _origin)
+{
+	coords = &_origin;
+}
+
+UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	UIButton2* generated = NULL;
 	if (row_index > 2 || col_index > 2)
@@ -145,18 +153,17 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 	{
 		unsigned int result = col_index + row_index;
 
-		unsigned int pX = pos1.x + (button_distance.x *col_index);
-		unsigned int pY = pos1.y + (button_distance.y *row_index);
-
+		unsigned int pX = coords->pos1.x + (coords->button_distance.x *col_index);
+		unsigned int pY = coords->pos1.y + (coords->button_distance.y *row_index);
 
 		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, path, idle, clicked, _toRender, collider);
 
-		generated->SetParent(frame);
+		generated->SetParent(coords->frame);
 	}
 	return generated;
 }
 
-UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, UIImage* _icon, SDL_Texture& tex, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
+UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	UIButton2* generated = NULL;
 	if (row_index > 2 || col_index > 2)
@@ -167,13 +174,12 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 	{
 		unsigned int result = col_index + row_index;
 
-		unsigned int pX = pos1.x + (button_distance.x *col_index);
-		unsigned int pY = pos1.y + (button_distance.y *row_index);
+		unsigned int pX = coords->pos1.x + (coords->button_distance.x *col_index);
+		unsigned int pY = coords->pos1.y + (coords->button_distance.y *row_index);
 
+		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex,  idle, clicked, _toRender, collider);
 
-		UIButton2* generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex,  idle, clicked, _toRender, collider);
-
-		generated->SetParent(frame);
+		generated->SetParent(coords->frame);
 	}
 	return generated;
 }
