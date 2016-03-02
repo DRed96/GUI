@@ -229,11 +229,13 @@ void j1Gui::declareGrids()
 
 	Grid3x3 nexus(coords);
 
-	UIButton2* button = nexus.setOrder({ 1, 0, 33, 34 }, { 74, 1, 33, 34 }, 0, 0, *back_b, true);
+	UIButton2* button = nexus.setOrder(App->orders->o_genProbe_toss,{ 1, 0, 33, 34 }, { 74, 1, 33, 34 }, 0, 0, *back_b, true);
 
-	UIImage* gen_probe = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 31, 31 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0, 0, 0, 0 });
+	UIImage* image = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 31, 31 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0, 0, 0, 0 });
 
-	gen_probe->SetParent(button);	
+	image->SetParent(button);	
+	button->AddListener((j1Module*)App->orders);
+
 
 	return;
 }

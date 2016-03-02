@@ -33,10 +33,10 @@ public:
 	*/
 	void addOrder(Order&, UIButton2* = NULL);
 
-	
-private:
 	Gen_probe o_genProbe_toss;
 	Attack o_attack;
+private:
+
 
 	p2DynArray<Order*> orders;
 };
@@ -84,7 +84,7 @@ public:
 	RETURN: Returns a pointer to the created button so it can be edited NULL on error
 	Order's button WILL be changed
 	*/
-	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path = NULL, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	UIButton2* setOrder(Order& toAssign, const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path = NULL, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
 	/*
 	Declare an order and assign it a position into de 3x3 Grid using
 	(Columns and rows go from 0 to 2)
@@ -97,12 +97,13 @@ public:
 	RETURN: Returns a pointer to the created button so it can be edited NULL on error
 	Order's button WILL be changed
 	*/
-	UIButton2* setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
+	UIButton2* setOrder(Order& toAssign, const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender = false, unsigned int width = 0, unsigned int height = 0, SDL_Rect collider = { 0, 0, 0, 0 });
 
 	/*
 	Change the location of a pregenerated button into a grid, not good for testing
 	*/
-	UIButton2* setOrder(unsigned int row_index, unsigned int col_index, UIButton2 & button);
+	UIButton2* setOrder(Order& toAssign, unsigned int row_index, unsigned int col_index, UIButton2 & button)
+	{	}
 
 private:
 

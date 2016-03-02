@@ -15,12 +15,9 @@ bool j1Orders::Awake(pugi::xml_node&)
 
 
 
-
-	/*Grid3x3 panel;
-
 	addOrder(o_genProbe_toss);
 	addOrder(o_attack);
-
+	/*
 	panel.setOrder(o_genProbe_toss, SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 467, 102, 32, 32 }, SDL_Rect{ 466, 102, 32, 32 }, 0, 0, "graphics/cmdicons.png");
 	panel.setOrder(o_attack, SDL_Rect{ 252, 442, 32, 32 }, SDL_Rect{ 252, 443, 32, 32 }, SDL_Rect{ 252, 441, 32, 32 }, 1, 0, "graphics/cmdicons.png");*/
 
@@ -142,7 +139,7 @@ Grid3x3::Grid3x3(Grid_Coords& _origin)
 	coords = &_origin;
 }
 
-UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
+UIButton2* Grid3x3::setOrder(Order& toAssign, const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, char* path, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	UIButton2* generated = NULL;
 	if (row_index > 2 || col_index > 2)
@@ -158,12 +155,13 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 
 		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, path, idle, clicked, _toRender, collider);
 
+		toAssign.SetButton(*generated);
 		generated->SetParent(coords->frame);
 	}
 	return generated;
 }
 
-UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
+UIButton2* Grid3x3::setOrder(Order& toAssign, const SDL_Rect & idle, const SDL_Rect & clicked, unsigned int row_index, unsigned int col_index, SDL_Texture& tex, bool _toRender, unsigned int width, unsigned int height, SDL_Rect collider)
 {
 	UIButton2* generated = NULL;
 	if (row_index > 2 || col_index > 2)
@@ -176,8 +174,10 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 
 		unsigned int pX = coords->pos1.x + (coords->button_distance.x *col_index);
 		unsigned int pY = coords->pos1.y + (coords->button_distance.y *row_index);
-
+		
 		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex,  idle, clicked, _toRender, collider);
+
+		toAssign.SetButton(*generated);
 
 		generated->SetParent(coords->frame);
 	}
