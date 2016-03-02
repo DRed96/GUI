@@ -27,18 +27,18 @@ bool j1Orders::Awake(pugi::xml_node&)
 	SDL_Texture* backbutton = App->tex->Load("graphics/pcmdbtns.png");
 
 
-	UIButton2* test = App->gui->CreateUIButton2(SDL_Rect{ 50, 50, 0, 0 }, backbutton, NULL, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true);
+	UIButton2* test = App->gui->CreateUIButton2(SDL_Rect{ 50, 50, 0, 0 }, backbutton,  SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true);
 
 	UIImage* bad = App->gui->CreateUIImage(SDL_Rect{ 1, 1, 32, 32 }, "graphics/cmdicons.png", SDL_Rect{ 468, 102, 32, 32 }, SDL_Rect{ 0,0,0,0 });
 	bad->SetParent(test);
 
 	// Testing with path NULL
 	
-	UIButton2* test_path = App->gui->CreateUIButton2(SDL_Rect{ 90, 50, 0, 0 }, (char*) NULL, bad, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
+	UIButton2* test_path = App->gui->CreateUIButton2(SDL_Rect{ 90, 50, 0, 0 }, (char*) NULL,  SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
 
 	// Testing with path NULL
 
-	UIButton2* test_path2 = App->gui->CreateUIButton2(SDL_Rect{ 120, 50, 0, 0 }, (char*) "graphics/pcmdbtns.png", bad, SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
+	UIButton2* test_path2 = App->gui->CreateUIButton2(SDL_Rect{ 120, 50, 0, 0 }, (char*) "graphics/pcmdbtns.png", SDL_Rect{ 1, 0, 33, 34 }, SDL_Rect{ 74, 1, 33, 34 }, true, SDL_Rect{ 0, 0, 0, 0 });
 
 	/*UIButton* test = App->gui->CreateUIButton({ 20, 50, 0, 0 }, { 0, 113, 229, 69 }, { 411, 169, 229, 69 }, { 642, 169, 229, 69 }, { 12, 10, 200, 47 });
 	test->movable = false;
@@ -149,7 +149,7 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 		unsigned int pY = pos1.y + (button_distance.y *row_index);
 
 
-		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, path, _icon, idle, clicked, _toRender, collider);
+		generated = App->gui->CreateUIButton2({ pX, pY, width, height }, path, idle, clicked, _toRender, collider);
 
 		generated->SetParent(frame);
 	}
@@ -171,7 +171,7 @@ UIButton2* Grid3x3::setOrder(const SDL_Rect & idle, const SDL_Rect & clicked, un
 		unsigned int pY = pos1.y + (button_distance.y *row_index);
 
 
-		UIButton2* generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex, _icon, idle, clicked, _toRender, collider);
+		UIButton2* generated = App->gui->CreateUIButton2({ pX, pY, width, height }, &tex,  idle, clicked, _toRender, collider);
 
 		generated->SetParent(frame);
 	}

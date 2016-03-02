@@ -91,11 +91,11 @@ UIButton* j1Gui::CreateUIButton(SDL_Rect position, SDL_Rect button, SDL_Rect hov
 	return Button;
 }
 
-UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, SDL_Texture* tex, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
+UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, SDL_Texture* tex,  const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
 {
 	int id = UIElements.count();
 
-	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, tex, _button, _clicked, _icon, _toRender, collider);
+	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h, tex, _button, _clicked, _toRender, collider);
 	
 	UIElements.add(generated);
 
@@ -110,14 +110,13 @@ UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, SDL_Texture* tex, UI
 }
 
 
-UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, char* path, UIImage* _icon, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
+UIButton2* j1Gui::CreateUIButton2(const SDL_Rect& position, char* path, const SDL_Rect& _button, const SDL_Rect& _clicked, bool _toRender, SDL_Rect collider)
 {
 	int id = UIElements.count();
 
-	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h,path, _button, _clicked, _icon, _toRender, collider);
-	_icon->SetParent(generated);
-	UIElements.add(generated);
+	UIButton2* generated = new UIButton2(id, position.x, position.y, position.w, position.h,path, _button, _clicked, _toRender, collider);
 
+	UIElements.add(generated);
 	
 	generated->localPosition.w = _button.w; generated->localPosition.h = _button.h;
 

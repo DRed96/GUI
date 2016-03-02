@@ -204,11 +204,11 @@ class UIButton2 : public UIElement
 public:
 	//Constructors
 	
-	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, char* path, const SDL_Rect& button, const  SDL_Rect& clicked,bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
 	
-	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, const SDL_Rect& button, const SDL_Rect& clicked, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
-	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, UIImage* _icon = NULL, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
+	UIButton2(int _id, int x, int y, int w, int h, SDL_Texture* back, const SDL_Rect& button, const  SDL_Rect& clicked, bool _toRender = false, const SDL_Rect _collider = { 0, 0, 0, 0 });
 
 	//Destructor
 	~UIButton2(){}
@@ -232,9 +232,6 @@ private:
 	//Text label + window
 
 	Order* order;
-
-	/*Not necessary at the time*/
-		//UIImage* icon;
 
 	//The image that will actually change
 	SDL_Texture* back;
